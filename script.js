@@ -38,7 +38,7 @@ function validYear(year) {
     }
 }
 
-function validDayInMonth(day, month) {
+function validDayInMonth(day, month, year) {
     if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
         return "Day not 31"
     }
@@ -61,7 +61,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
     errorArray.push(validDay(day))
     errorArray.push(validMonth(month))
     errorArray.push(validYear(year))
-    errorArray.push(validDayInMonth(day, month))
+    errorArray.push(validDayInMonth(day, month, year))
     errorArray = errorArray.filter(a => a)
     if (errorArray.length == 0) {
         document.querySelector('#Messagelabel').innerHTML = "Oke"
