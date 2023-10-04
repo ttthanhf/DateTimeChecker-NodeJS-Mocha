@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "chromedriver": "^117.0.3",
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.13.0"
+  },
+  "name": "date-time-checker",
+  "version": "1.0.0",
+  "main": "script.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
