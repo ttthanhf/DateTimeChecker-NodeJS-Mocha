@@ -1,85 +1,49 @@
-function breakDown(arr) {
-    let result = [];
-    for (let i = 0; i < arr.length; i++) {
-        result.push(arr[i]);
-        if (i !== arr.length - 1) {
-            result.push("<br>");
-        }
-    }
-    return result;
-}
+const breakDown = (arr) => arr.join("<br>");
+const isLeapYear = (year) => ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 
-function leapYear(year) {
-    return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+function validateInput(value, min, max, name) {
+    if (!value) return `${name} empty`;
+    if (isNaN(value)) return `${name} is not a number`;
+    if (value < min || value > max) return `${name} out of range`;
+    return null;
 }
 
 function validDay(day) {
-    if (day == null || day == "") {
-        return "Day empty";
-    }
-    if (isNaN(day)) {
-        return "Day is not a number";
-    }
-    if (day <= 0 || day >= 32) {
-        return "Day out of range";
-    }
+    return validateInput(day, 1, 31, 'Day');
 }
 
 function validMonth(month) {
-    if (month == null || month == "") {
-        return "Month empty";
-    }
-    if (isNaN(month)) {
-        return "Month is not a number";
-    }
-    if (month <= 0 || month >= 13) {
-        return "Month out of range";
-    }
+    return validateInput(month, 1, 12, 'Month');
 }
 
 function validYear(year) {
-    if (year == null || year == "") {
-        return "Year empty";
-    }
-    if (isNaN(year)) {
-        return "Year is not a number";
-    }
-    if (year <= 0 || year >= 9999) {
-        return "Year out of range";
-    }
+    return validateInput(year, 1, 9999, 'Year');
 }
 
 function validDayInMonth(day, month, year) {
-    if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
-        return "Day not 31"
-    }
+    if ([4, 6, 9, 11].includes(month) && day == 31) return "Day not 31";
     if (month == 2) {
-        if (day > 29) {
-            return "February not more than 29 days"
-        }
-        if (!leapYear(year) && day == 29) {
-            return "February in Leap year not more than 28 days"
-        }
+        if (day > 29) return "February not more than 29 days";
+        if (!isLeapYear(year) && day == 29) return "February in Leap year not more than 28 days";
     }
+    return null;
 }
 
 document.querySelector('form').addEventListener('submit', (e) => {
     e.preventDefault();
-    let errorArray = []
-    let day = document.querySelector('#day').value
-    let month = document.querySelector('#month').value
-    let year = document.querySelector('#year').value
-    errorArray.push(validDay(day))
-    errorArray.push(validMonth(month))
-    errorArray.push(validYear(year))
-    errorArray.push(validDayInMonth(day, month, year))
-    errorArray = errorArray.filter(a => a)
-    if (errorArray.length == 0) {
-        document.querySelector('#Messagelabel').innerHTML = "Oke"
-    }
-    else {
-        errorArray = breakDown(errorArray)
-        errorArray = errorArray.toString().replaceAll(',', '')
-        document.querySelector('#Messagelabel').innerHTML = errorArray
-    }
-})
+
+    let day = document.querySelector('#day').value;
+    let month = document.querySelector('#month').value;
+    let year = document.querySelector('#year').value;
+
+    let errorArray = [
+        validDay(day),
+        validMonth(month),
+        validYear(year),
+        validDayInMonth(day, month, year)
+    ].filter(a => a);
+
+    let errorMessage = errorArray.length === 0 ? "Oke" : breakDown(errorArray);
+
+    document.querySelector('#Messagelabel').innerHTML = errorMessage;
+});
