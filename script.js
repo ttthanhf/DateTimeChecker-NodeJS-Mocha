@@ -52,7 +52,7 @@ function validDayInMonth(day, month) {
             if (day >= 29) {
                 return "February not more than 29 days"
             }
-            else if (!leapYear(year) && day == 29) {
+            if (!leapYear(year) && day == 29) {
                 return "February in Leap year not more than 28 days"
             }
             break;
