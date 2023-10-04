@@ -39,23 +39,16 @@ function validYear(year) {
 }
 
 function validDayInMonth(day, month) {
-    switch (month) {
-        case 4:
-        case 6:
-        case 9:
-        case 11:
-            if (day == 31) {
-                return "Day not 31"
-            }
-            break;
-        case 2:
-            if (day >= 29) {
-                return "February not more than 29 days"
-            }
-            if (!leapYear(year) && day == 29) {
-                return "February in Leap year not more than 28 days"
-            }
-            break;
+    if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
+        return "Day not 31"
+    }
+    if (month == 2) {
+        if (day > 29) {
+            return "February not more than 29 days"
+        }
+        if (!leapYear(year) && day == 29) {
+            return "February in Leap year not more than 28 days"
+        }
     }
 }
 
