@@ -1,3 +1,14 @@
+function breakDown(arr) {
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        result.push(arr[i]);
+        if (i !== arr.length - 1) {
+            result.push("<br>");
+        }
+    }
+    return result;
+}
+
 function leapYear(year) {
     return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 }
@@ -16,25 +27,25 @@ function validDay(day) {
 
 function validMonth(month) {
     if (month == null || month == "") {
-        return "month empty";
+        return "Month empty";
     }
     if (isNaN(month)) {
-        return "month is not a number";
+        return "Month is not a number";
     }
     if (month <= 0 || month >= 13) {
-        return "month out of range";
+        return "Month out of range";
     }
 }
 
 function validYear(year) {
     if (year == null || year == "") {
-        return "year empty";
+        return "Year empty";
     }
     if (isNaN(year)) {
-        return "year is not a number";
+        return "Year is not a number";
     }
     if (year <= 0 || year >= 9999) {
-        return "year out of range";
+        return "Year out of range";
     }
 }
 
@@ -67,6 +78,8 @@ document.querySelector('form').addEventListener('submit', (e) => {
         document.querySelector('#Messagelabel').innerHTML = "Oke"
     }
     else {
+        errorArray = breakDown(errorArray)
+        errorArray = errorArray.toString().replaceAll(',', '')
         document.querySelector('#Messagelabel').innerHTML = errorArray
     }
 })
