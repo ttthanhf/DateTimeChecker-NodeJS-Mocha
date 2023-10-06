@@ -24,31 +24,29 @@ describe('Date Time Checker', function () {
         await driver.quit();
     });
 
-    it('Input valid date and submit then message must display "Oke"', async function () {
+    it('Input valid date and submit then valid date must display true', async function () {
         await driver.findElement(By.id('day')).sendKeys('10');
         await driver.findElement(By.id('month')).sendKeys('10');
         await driver.findElement(By.id('year')).sendKeys('2022');
 
         await driver.findElement(By.id('form')).submit();
 
-        let result = await driver.findElement(By.id('Messagelabel')).getText();
+        let result = await driver.findElement(By.id('statusLabel')).getText();
 
-        // Sử dụng assert
-        assert.strictEqual(result, 'Oke', 'Kết quả không chính xác');
+        assert.equal(result, 'true');
 
     });
 
-    it('Input out range date and submit then message must display "Day out of range\nMonth out of range\nYear out of range"', async function () {
+    it('Input out range date and submit then valid date must display false', async function () {
         await driver.findElement(By.id('day')).sendKeys('10431');
         await driver.findElement(By.id('month')).sendKeys('10431');
         await driver.findElement(By.id('year')).sendKeys('2022431');
 
         await driver.findElement(By.id('form')).submit();
 
-        let result = await driver.findElement(By.id('Messagelabel')).getText();
+        let result = await driver.findElement(By.id('statusLabel')).getText();
 
-        // Sử dụng assert
-        assert.strictEqual(result, 'Day out of range\nMonth out of range\nYear out of range', 'Kết quả không chính xác');
+        assert.equal(result, 'false');
 
     });
 });

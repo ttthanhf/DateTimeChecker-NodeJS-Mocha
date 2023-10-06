@@ -35,7 +35,9 @@ document.querySelector('form').addEventListener('submit', (e) => {
         validDayInMonth(day, month, year)
     ].filter(a => a);
 
-    let msg = errorArray.length == 0 ? "Oke" : breakDown(errorArray);
+    let msg = errorArray.length == 0 ? "Ok" : breakDown(errorArray);
+    let status = errorArray.length == 0;
 
     document.querySelector('#Messagelabel').innerHTML = msg;
+    document.querySelector('#statusLabel').innerHTML = status;
 });
