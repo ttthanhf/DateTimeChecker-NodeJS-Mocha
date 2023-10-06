@@ -11,7 +11,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "unittest": "mocha test/unit/unit.test.js",
+    "uitest": "mocha test/unit/ui.test.js"
   },
   "author": "",
   "license": "ISC",
