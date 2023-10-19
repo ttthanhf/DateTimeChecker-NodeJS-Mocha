@@ -10,13 +10,13 @@ function validateInput(value, min, max, name) {
 
 const validDay = (day) => validateInput(day, 1, 31, 'Day');
 const validMonth = (month) => validateInput(month, 1, 12, 'Month');
-const validYear = (year) => validateInput(year, 1, 9999, 'Year');
+const validYear = (year) => validateInput(year, 1, 3000, 'Year');
 
 function validDayInMonth(day, month, year) {
-    if ([4, 6, 9, 11].includes(parseInt(month)) && day == 31) return "April, June, September, and November do not have 31 days.";
+    if ([4, 6, 9, 11].includes(parseInt(month)) && day == 31) return "April, June, September, and November do not have 31 days";
     if (month == 2) {
-        if (day > 29) return "February cannot have more than 29 days.";
-        if (!isLeapYear(year) && day == 29) return "February in non-leap year cannot have 29 days.";
+        if (day > 29) return "February cannot have more than 29 days";
+        if (!isLeapYear(year) && day == 29) return "February in non-leap year cannot have 29 days";
     }
     return null;
 }
