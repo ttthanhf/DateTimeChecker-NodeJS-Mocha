@@ -25,6 +25,7 @@ describe('Date Time Checker', function () {
     });
 
     it('Input valid date and submit then valid date must display true', async function () {
+
         await driver.findElement(By.id('day')).sendKeys('10');
         await driver.findElement(By.id('month')).sendKeys('10');
         await driver.findElement(By.id('year')).sendKeys('2022');
@@ -38,6 +39,7 @@ describe('Date Time Checker', function () {
     });
 
     it('Input out range date and submit then valid date must display false', async function () {
+
         await driver.findElement(By.id('day')).sendKeys('10431');
         await driver.findElement(By.id('month')).sendKeys('10431');
         await driver.findElement(By.id('year')).sendKeys('2022431');
