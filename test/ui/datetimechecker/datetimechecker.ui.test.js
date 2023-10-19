@@ -73,6 +73,7 @@ describe('Date Time Checker Date Validation', function () {
 
     //testing-head
     context('Valid input for day, month, and year validation', async function () {
+
         it('should return true for validDate and no any error labels display when input day 1 , month 1, year 1', async function () {
 
             await inputDateAndSubmit('1', '1', '1');
@@ -103,6 +104,24 @@ describe('Date Time Checker Date Validation', function () {
         it('should return true for validDate and no any error labels display when input day 30 , month 11, year 3000', async function () {
 
             await inputDateAndSubmit('30', '11', '3000');
+            let { msgErrors, statusValidDate } = await getValidationMessages();
+            assert.deepEqual(msgErrors, msgErrorsEmpty);
+            assert.equal(statusValidDate, 'true');
+
+        });
+
+        it('should return true for validDate and no any error labels display when input day 30 , month 9, year 3000', async function () {
+
+            await inputDateAndSubmit('30', '9', '3000');
+            let { msgErrors, statusValidDate } = await getValidationMessages();
+            assert.deepEqual(msgErrors, msgErrorsEmpty);
+            assert.equal(statusValidDate, 'true');
+
+        });
+
+        it('should return true for validDate and no any error labels display when input day 30 , month 6, year 3000', async function () {
+
+            await inputDateAndSubmit('30', '6', '3000');
             let { msgErrors, statusValidDate } = await getValidationMessages();
             assert.deepEqual(msgErrors, msgErrorsEmpty);
             assert.equal(statusValidDate, 'true');
@@ -166,9 +185,11 @@ describe('Date Time Checker Date Validation', function () {
             assert.equal(statusValidDate, 'false');
 
         });
+
     })
 
     context('Invalid input for month validation', async function () {
+
         it('should return false for validDate and error label display <Month out of range> when input month 13 out of allowed range with valid day and year', async function () {
 
             await inputDateAndSubmit('1', '13', '2021');
@@ -204,6 +225,7 @@ describe('Date Time Checker Date Validation', function () {
             assert.equal(statusValidDate, 'false');
 
         });
+
     })
 
     context('Invalid input for year validation', async function () {
@@ -243,6 +265,7 @@ describe('Date Time Checker Date Validation', function () {
             assert.equal(statusValidDate, 'false');
 
         });
+
     })
 
     context('Invalid input for date validation', async function () {
@@ -268,6 +291,24 @@ describe('Date Time Checker Date Validation', function () {
         it('should return false for validDate and error label display <April, June, September, and November do not have 31 days> when input day 31 in June', async function () {
 
             await inputDateAndSubmit('31', '6', '2023');
+            let { msgErrors, statusValidDate } = await getValidationMessages();
+            assert.equal(msgErrors.msgDayInMonthLabelError, "April, June, September, and November do not have 31 days")
+            assert.equal(statusValidDate, 'false');
+
+        });
+
+        it('should return false for validDate and error label display <April, June, September, and November do not have 31 days> when input day 31 in November', async function () {
+
+            await inputDateAndSubmit('31', '11', '2023');
+            let { msgErrors, statusValidDate } = await getValidationMessages();
+            assert.equal(msgErrors.msgDayInMonthLabelError, "April, June, September, and November do not have 31 days")
+            assert.equal(statusValidDate, 'false');
+
+        });
+
+        it('should return false for validDate and error label display <April, June, September, and November do not have 31 days> when input day 31 in April', async function () {
+
+            await inputDateAndSubmit('31', '4', '2023');
             let { msgErrors, statusValidDate } = await getValidationMessages();
             assert.equal(msgErrors.msgDayInMonthLabelError, "April, June, September, and November do not have 31 days")
             assert.equal(statusValidDate, 'false');
