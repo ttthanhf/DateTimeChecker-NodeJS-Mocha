@@ -6,10 +6,9 @@ describe('Date Time Checker Date Validation', function () {
     this.timeout(10000);
 
     let driver;
-
     before(async function () {
         let chromeOptions = new chrome.Options();
-        // chromeOptions.addArguments('--headless');
+        chromeOptions.addArguments('--window-size=960,920');
 
         driver = await new Builder()
             .forBrowser('chrome')
@@ -17,7 +16,6 @@ describe('Date Time Checker Date Validation', function () {
             .build();
 
         await driver.get('http://127.0.0.1:5500/web/index.html');
-        await driver.sleep(1);
     });
 
     after(async function () {
